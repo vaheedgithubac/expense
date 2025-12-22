@@ -117,11 +117,11 @@ initContainers:
             key: password
     command: ["sh","-c","for i in $(seq 1 30); do mysql -h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -e 'SELECT 1' && exit 0; echo Waiting for MySQL...; sleep 2; done; echo Timeout waiting for MySQL; exit 1"]
 ```
-## ✅ How it works
-**1.** Tries **30 times** `(seq 1 30)`, sleeping **2 seconds** between attempts → ~60 s total timeout.
-**2**. Uses `MYSQL_PWD` from the environment, **no password exposed in process list**.
-**3**. Logs `"Waiting for MySQL..."` on each failed attempt.
-**4**. Exits **1** if MySQL never becomes available → pod fails init container (good for readiness gating).
+## ✅ How it works  
+**1.** Tries **30 times** `(seq 1 30)`, sleeping **2 seconds** between attempts → ~60 s total timeout.  
+**2**. Uses `MYSQL_PWD` from the environment, **no password exposed in process list**.  
+**3**. Logs `"Waiting for MySQL..."` on each failed attempt.  
+**4**. Exits **1** if MySQL never becomes available → pod fails init container (good for readiness gating).  
 
 ## 🧠 Behavior
 - Loops until DB is reachable  
