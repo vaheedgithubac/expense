@@ -117,7 +117,7 @@ initContainers:
             key: password
     command: ["sh","-c","for i in $(seq 1 30); do mysql -h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -e 'SELECT 1' && exit 0; echo Waiting for MySQL...; sleep 2; done; echo Timeout waiting for MySQL; exit 1"]
 ```
-Very Important Note: Variable Should be `MYSQL_PWD`, since mysql client reads that env variable by default  
+** Very Important Note:** Variable name should be `MYSQL_PWD`, since mysql client reads that env variable by default  
 
 ## ✅ How it works  
 **1.** Tries **30 times** `(seq 1 30)`, sleeping **2 seconds** between attempts → ~60 s total timeout.  
