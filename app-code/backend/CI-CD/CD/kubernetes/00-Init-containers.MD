@@ -45,3 +45,58 @@ initContainers:
 ✔ Small  
 ✔ Secure  
 ✔ Production-grade  
+
+✅ Option 2: No external registry  
+**Alpine + MariaDB mysql-client**  
+**🔹 When to use  
+- You want only Docker Hub  
+- You want a shell for loops/logging  
+- MySQL 8 compatibility is sufficient (MariaDB client)  
+
+## Dockerfile (pin Alpine version!)   
+```text
+FROM alpine:3.19
+RUN apk add --no-cache mysql-client
+ENTRYPOINT ["sh", "-c"]
+```
+**🔐 Why pin Alpine?
+`alpine:latest` can change MariaDB versions unexpectedly.
+
+**Kubernetes initContainer (Alpine)
+```yaml
+initContainers:
+  - name: wait-for-mysql
+    image: my-alpine-mysql-client:1.0
+    env:
+      - name: MYSQL_HOST
+        value: mysql
+      - name: MYSQL_PORT
+        value: "3306"
+      - name: MYSQL_USER
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: username
+      - name: MYSQL_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: password
+    command:
+      - sh
+      - -c
+      - |
+        until mysql -h "$MYSQL_HOST" -P "$MYSQL_PORT" \
+          -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" \
+          -e "SELECT 1"; do
+          echo "Waiting for MySQL..."
+          sleep 2
+        done
+```
+##🧠 Behavior
+- Loops until DB is reachable  
+- Clear logs  
+- Very easy to debug  
+✔ Simple  
+✔ No external registry   
+✔ Slightly larger image (~15–20MB)  
