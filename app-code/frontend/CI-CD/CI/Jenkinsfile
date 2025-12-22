@@ -8,7 +8,7 @@ def config = [
 
     // Git Variables
     EXECUTE_GITCHECKOUT_STAGE: "yes",
-    MY_GIT_URL: "https://github.com/vaheedgithubac/githubac25.git", // required
+    MY_GIT_URL: "https://github.com/vaheedgithubac/expense.git", // required
     MY_GIT_REPO_TYPE: "public",   // required (public/private)
     MY_GIT_CREDENTIALS_ID: "",    // required for private repos
     MY_GIT_BRANCH: "",            // Defaults to "main" if not set
