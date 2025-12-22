@@ -31,6 +31,7 @@ initContainers:
             key: password
     command: ["mysql","-h$(MYSQL_HOST)","-P$(MYSQL_PORT)","-u$(MYSQL_USER)","-e","SELECT 1"]
 ```
+**Very Important Note:** Variable name should be `MYSQL_PWD`, since mysql client reads that env variable by default
 Note:
 - use `$(MYSQL_HOST)` but not use `${MYSQL_HOST}`, since `cgr.dev/chainguard/mysql-client:8.0` has no shell
 
@@ -55,9 +56,9 @@ Note:
 ✔ Secure  
 ✔ Production-grade  
 
-✅ Option 2: No external registry  
-** Alpine + MariaDB mysql-client**  
-** 🔹 When to use  
+## ✅ Option 2: No external registry  
+**Alpine + MariaDB mysql-client**  
+**🔹 When to use**   
 - You want only Docker Hub  
 - You want a shell for loops/logging  
 - MySQL 8 compatibility is sufficient (MariaDB client)  
