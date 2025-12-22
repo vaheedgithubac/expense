@@ -26,6 +26,7 @@ initContainers:
       - -p$(MYSQL_PASSWORD)
       - -e
       - "SELECT 1"  
+```
 ## 🧠 Behavior  
 - Kubernetes retries the init container until MySQL accepts connections  
 - No loops needed  
