@@ -36,8 +36,11 @@ initContainers:
       - -u$(MYSQL_USER)
       - -p$(MYSQL_PASSWORD)
       - -e
-      - "SELECT 1"  
+      - "SELECT 1" 
+    command: ["mysql","-h$(MYSQL_HOST)","-P$(MYSQL_PORT)","-u$(MYSQL_USER)","-p$(MYSQL_PASSWORD)","-e","SELECT 1"]
 ```
+Note:
+- use `$(MYSQL_HOST)` but not use `${MYSQL_HOST}`, since `cgr.dev/chainguard/mysql-client:8.0` has no shell
 ## 🧠 Behavior  
 - Kubernetes retries the init container until MySQL accepts connections  
 - No loops needed  
