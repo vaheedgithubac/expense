@@ -35,14 +35,13 @@ Note:
 - use `$(MYSQL_HOST)` but not use `${MYSQL_HOST}`, since `cgr.dev/chainguard/mysql-client:8.0` has no shell
 
 ## ✅ Key Points  
-
-**1.Password handling is safe**  
+**1. Password handling is safe**  
 - Uses `MYSQL_PWD` environment variable. 
 - Password does **not appear in command-line args** or process list.  
-**2.No shell required**  
+**2. No shell required**  
 - Chainguard images are distroless.  
-- No `sh` or `loops` — Kubernetes will **retry the initContainer** automatically if it fails. 
-**3.Minimal and production-ready**  
+- No `sh` or `loops` — Kubernetes will **retry the initContainer** automatically if it fails.   
+**3. Minimal and production-ready**  
 - Small image (~10 MB).  
 - Only contains MySQL client.
 
