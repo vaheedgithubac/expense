@@ -36,14 +36,14 @@ Note:
 
 ## ✅ Key Points  
 **1.Password handling is safe**  
-    - Uses `MYSQL_PWD` environment variable.    
-    - Password does **not appear in command-line args** or process list. 
+- Uses `MYSQL_PWD` environment variable.    
+- Password does **not appear in command-line args** or process list.   
 **2.No shell required**    
-    - Chainguard images are distroless.   
-    - No `sh` or `loops` — Kubernetes will **retry the initContainer** automatically if it fails.  
+- Chainguard images are distroless.   
+- No `sh` or `loops` — Kubernetes will **retry the initContainer** automatically if it fails.  
 **3.Minimal and production-ready**
-     - Small image (~10 MB).  
-     - Only contains MySQL client.  
+- Small image (~10 MB).  
+- Only contains MySQL client.  
 
 ## 🧠 Behavior  
 - Kubernetes retries the init container until MySQL accepts connections  
