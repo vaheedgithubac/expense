@@ -16,7 +16,7 @@ initContainers:
     image: cgr.dev/chainguard/mysql-client:8.0
     env:
       - name: MYSQL_HOST
-        value: mysql
+        value: mysql            # Your MySQL service name
       - name: MYSQL_PORT
         value: "3306"
       - name: MYSQL_USER
@@ -24,23 +24,27 @@ initContainers:
           secretKeyRef:
             name: mysql-secret
             key: username
-      - name: MYSQL_PASSWORD
+      - name: MYSQL_PWD            # Secure way to pass password
         valueFrom:
           secretKeyRef:
             name: mysql-secret
             key: password
-    command:
-      - mysql
-      - -h$(MYSQL_HOST)
-      - -P$(MYSQL_PORT)
-      - -u$(MYSQL_USER)
-      - -p$(MYSQL_PASSWORD)
-      - -e
-      - "SELECT 1" 
-    command: ["mysql","-h$(MYSQL_HOST)","-P$(MYSQL_PORT)","-u$(MYSQL_USER)","-p$(MYSQL_PASSWORD)","-e","SELECT 1"]
+    command: ["mysql","-h$(MYSQL_HOST)","-P$(MYSQL_PORT)","-u$(MYSQL_USER)","-e","SELECT 1"]
 ```
 Note:
 - use `$(MYSQL_HOST)` but not use `${MYSQL_HOST}`, since `cgr.dev/chainguard/mysql-client:8.0` has no shell
+
+## ✅ Key Points
+**1. Password handling is safe**  
+    - Uses `MYSQL_PWD` environment variable.  
+    - Password does **not appear in command-line args** or process list.  
+**2. No shell required**  
+    - Chainguard images are distroless.  
+    - No `sh` or `loops` — Kubernetes will **retry the initContainer** automatically if it fails. 
+**3. Minimal and production-ready**
+     - Small image (~10 MB).
+     - Only contains MySQL client.
+
 ## 🧠 Behavior  
 - Kubernetes retries the init container until MySQL accepts connections  
 - No loops needed  
