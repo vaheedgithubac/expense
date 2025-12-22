@@ -50,8 +50,8 @@ Note:
 ✔ Production-grade  
 
 ✅ Option 2: No external registry  
-**Alpine + MariaDB mysql-client**  
-**🔹 When to use  
+** Alpine + MariaDB mysql-client**  
+** 🔹 When to use  
 - You want only Docker Hub  
 - You want a shell for loops/logging  
 - MySQL 8 compatibility is sufficient (MariaDB client)  
@@ -96,6 +96,33 @@ initContainers:
           sleep 2
         done
 ```
+```yaml
+initContainers:
+  - name: wait-for-mysql
+    image: alpine:3.19  # lightweight image with shell
+    env:
+      - name: MYSQL_HOST
+        value: mysql          # your MySQL service name
+      - name: MYSQL_PORT
+        value: "3306"
+      - name: MYSQL_USER
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: username
+      - name: MYSQL_PWD          # secure way to pass password
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: password
+    command: ["sh","-c","for i in $(seq 1 30); do mysql -h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -e 'SELECT 1' && exit 0; echo Waiting for MySQL...; sleep 2; done; echo Timeout waiting for MySQL; exit 1"]
+```
+## ✅ How it works
+**1.** Tries **30 times** `(seq 1 30)`, sleeping **2 seconds** between attempts → ~60 s total timeout.
+**2**. Uses `MYSQL_PWD` from the environment, **no password exposed in process list**.
+**3**. Logs `"Waiting for MySQL..."` on each failed attempt.
+**4**. Exits **1** if MySQL never becomes available → pod fails init container (good for readiness gating).
+
 ## 🧠 Behavior
 - Loops until DB is reachable  
 - Clear logs  
