@@ -93,7 +93,7 @@ initContainers:
           sleep 2
         done
 ```
-##🧠 Behavior
+## 🧠 Behavior
 - Loops until DB is reachable  
 - Clear logs  
 - Very easy to debug  
