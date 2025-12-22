@@ -136,3 +136,75 @@ initContainers:
 ✔ Simple  
 ✔ No external registry   
 ✔ Slightly larger image (~15–20MB)  
+
+## Full Deployment example(This is production-ready and uses secure password handling (MYSQL_PWD))
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      initContainers:
+        - name: wait-for-mysql
+          image: cgr.dev/chainguard/mysql-client:8.0
+          env:
+            - name: MYSQL_HOST
+              value: mysql
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: MYSQL_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+          command: ["mysql","-h$(MYSQL_HOST)","-P$(MYSQL_PORT)","-u$(MYSQL_USER)","-e","SELECT 1"]
+      containers:
+        - name: my-app-container
+          image: my-app:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MYSQL_HOST
+              value: mysql
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: MYSQL_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+          readinessProbe:
+            exec:
+              command:
+                - mysql
+                - -h$(MYSQL_HOST)
+                - -P$(MYSQL_PORT)
+                - -u$(MYSQL_USER)
+                - -e
+                - "SELECT 1"
+            initialDelaySeconds: 5
+            periodSeconds: 5
+```
+## ✅ How this works  
+**1. InitContainer** runs first  
+  - Tries to connect to MySQL using the `SELECT 1` command.
+  - If MySQL isn’t ready, it `fails and Kubernetes retries automatically`.
