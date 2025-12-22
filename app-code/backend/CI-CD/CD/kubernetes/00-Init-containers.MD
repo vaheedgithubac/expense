@@ -137,7 +137,7 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: username
-            - name: MYSQL_PWD
+            - name: MYSQL_PWD             # secure way to pass password
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
