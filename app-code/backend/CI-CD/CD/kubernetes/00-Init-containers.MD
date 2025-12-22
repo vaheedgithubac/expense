@@ -1,11 +1,11 @@
 ## ✅ Option 1: Smallest + safest
 **`cgr.dev/chainguard/mysql-client:8.0` (true MySQL 8 client)**  
-🔹 When to use
+🔹 When to use  
 - You want exact MySQL 8 client
 - Very small image
 - Security-focused production setup
 ## ⚠️ Important
-Chainguard images are **distroless → NO shell (`sh`)**.
+Chainguard images are **distroless → NO shell (`sh`)**.  
 So we must **run `mysql` directly**, not a shell loop.
 
 ## Kubernetes initContainer (Chainguard)
