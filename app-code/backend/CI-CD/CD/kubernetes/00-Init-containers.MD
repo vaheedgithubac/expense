@@ -36,7 +36,7 @@ Note:
 
 ## ✅ Key Points
 **1. Password handling is safe**  
-    - Uses `MYSQL_PWD` environment variable.    
+- Uses `MYSQL_PWD` environment variable.    
     - Password does **not appear in command-line args** or process list.   
 **2. No shell required**    
     - Chainguard images are distroless.   
