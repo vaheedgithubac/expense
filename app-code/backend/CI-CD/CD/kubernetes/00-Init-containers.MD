@@ -73,36 +73,6 @@ ENTRYPOINT ["sh", "-c"]
 ```yaml
 initContainers:
   - name: wait-for-mysql
-    image: my-alpine-mysql-client:1.0
-    env:
-      - name: MYSQL_HOST
-        value: mysql
-      - name: MYSQL_PORT
-        value: "3306"
-      - name: MYSQL_USER
-        valueFrom:
-          secretKeyRef:
-            name: mysql-secret
-            key: username
-      - name: MYSQL_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: mysql-secret
-            key: password
-    command:
-      - sh
-      - -c
-      - |
-        until mysql -h "$MYSQL_HOST" -P "$MYSQL_PORT" \
-          -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" \
-          -e "SELECT 1"; do
-          echo "Waiting for MySQL..."
-          sleep 2
-        done
-```
-```yaml
-initContainers:
-  - name: wait-for-mysql
     image: alpine:3.19  # lightweight image with shell
     env:
       - name: MYSQL_HOST
@@ -121,7 +91,7 @@ initContainers:
             key: password
     command: ["sh","-c","for i in $(seq 1 30); do mysql -h $MYSQL_HOST -P $MYSQL_PORT -u$MYSQL_USER -e 'SELECT 1' && exit 0; echo Waiting for MySQL...; sleep 2; done; echo Timeout waiting for MySQL; exit 1"]
 ```
-** Very Important Note:** Variable name should be `MYSQL_PWD`, since mysql client reads that env variable by default  
+**Very Important Note:** Variable name should be `MYSQL_PWD`, since mysql client reads that env variable by default  
 
 ## ✅ How it works  
 **1.** Tries **30 times** `(seq 1 30)`, sleeping **2 seconds** between attempts → ~60 s total timeout.  
