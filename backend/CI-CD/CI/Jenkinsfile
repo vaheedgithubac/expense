@@ -78,5 +78,5 @@ config.NEXUS_GRP_REPO     = "${config.NEXUS_BASE_REPO}-maven-group"
 config.ECR_REGISTRY_URI = "${config.AWS_ACCOUNT_ID}.dkr.ecr.${config.REGION}.amazonaws.com"
 
 // Call pipeline
-Pipeline_NodeJS(config)
+PIPELINE_NODEJS(config)
 
