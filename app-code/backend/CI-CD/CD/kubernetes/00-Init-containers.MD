@@ -1,5 +1,6 @@
 ## ✅ Option 1: Smallest + safest
 **`cgr.dev/chainguard/mysql-client:8.0` (true MySQL 8 client)**  
+
 🔹 When to use  
 - You want exact MySQL 8 client
 - Very small image
