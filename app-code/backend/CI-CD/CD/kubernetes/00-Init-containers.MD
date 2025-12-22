@@ -58,10 +58,10 @@ Note:
 
 ## ✅ Option 2: No external registry  
 **Alpine + MariaDB mysql-client**  
-**🔹 When to use**   
-- You want only Docker Hub  
-- You want a shell for loops/logging  
-- MySQL 8 compatibility is sufficient (MariaDB client)  
+**🔹 When to use**  
+- You want to use only Docker Hub.  
+- You want a shell for loops and logging.  
+- MySQL 8 compatibility is sufficient (MariaDB client).  
 
 ## Dockerfile (pin Alpine version!)   
 ```text
