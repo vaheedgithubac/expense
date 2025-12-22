@@ -107,7 +107,8 @@ initContainers:
 ✔ No external registry   
 ✔ Slightly larger image (~15–20MB)  
 
-## Full Deployment example(This is production-ready and uses secure password handling (MYSQL_PWD))
+## Full Deployment example
+This is production-ready and uses secure password handling (`MYSQL_PWD`)  
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
