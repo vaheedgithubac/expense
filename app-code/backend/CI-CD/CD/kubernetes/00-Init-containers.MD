@@ -207,4 +207,14 @@ spec:
 ## ✅ How this works  
 **1. InitContainer** runs first  
   - Tries to connect to MySQL using the `SELECT 1` command.
-  - If MySQL isn’t ready, it `fails and Kubernetes retries automatically`.
+  - If MySQL isn’t ready, it **fails and Kubernetes retries automatically**.
+**2. Main app container** starts **only after the initContainer succeeds**.  
+**3. ReadinessProbe** ensures the pod isn’t marked ready until MySQL is actually reachable.  
+  - Uses the same secure `MYSQL_PWD` approach.  
+  - Runs every 5 seconds after a 5-second delay.
+
+## ⚡ Advantages  
+  - Minimal, secure, production-ready.   
+  - No passwords in command-line args (`MYSQL_PWD` used).  
+  - Works with **distroless Chainguard MySQL client**.  
+  - Automatic retries handled by Kubernetes; no shell loops needed.  
