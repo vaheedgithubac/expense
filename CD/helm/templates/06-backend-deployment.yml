@@ -6,7 +6,7 @@ metadata:
     app: expense-backend
     tier: backend
 spec:
-  replicas: 1
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
       app: expense-backend
@@ -45,12 +45,13 @@ spec:
       # ──────────────── App Container ────────────────    
       containers:
       - name: expense-backend-cont
-        image: vaheeddockerhub/expense-backend:1.0.0
+        image: {{ .Values.image.registryUsername }}/expense-backend:{{ .Values.image.version }}
         imagePullPolicy: Always
 
         ports:
           - name: expense-backend
             containerPort: 8080
+
         env:
           - name: DB_PWD
             valueFrom:
