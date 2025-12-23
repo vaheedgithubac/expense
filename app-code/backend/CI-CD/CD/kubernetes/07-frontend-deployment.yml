@@ -17,7 +17,7 @@ spec:
         app: expense-frontend
         tier: frontend
     spec:
-
+      # ──────────────── InitContainer ────────────────
       initContainers:
         - name: wait-for-app
           image: curlimages/curl:8.1.2   # Tiny image with curl
@@ -31,6 +31,7 @@ spec:
                 sleep 3
               done
               echo "App is ready!"
+      # ──────────────── App Container ────────────────
       containers:
         - name: expense-frontend-cont
           image: vaheeddockerhub/expense-frontend:1.0.0
@@ -38,15 +39,15 @@ spec:
           ports:
             - name: frontend
               containerPort: 8080
-      
+      # ──────────────── Startup Probe ────────────────
       startupProbe:
         tcpSocket:
           port: 8080
-        initialDelaySeconds: 30
+        initialDelaySeconds: 10
         periodSeconds: 10
         timeoutSeconds: 10
         failureThreshold: 6
-
+      # ──────────────── Readiness Probe ────────────────
       readinessProbe:
         tcpSocket:
           port: 8080
@@ -54,7 +55,7 @@ spec:
         periodSeconds: 10
         timeoutSeconds: 10
         failureThreshold: 3
-
+      # ──────────────── Liveness Probe ────────────────
       livenessProbe:
         httpGet:
           path: /nginx-health
