@@ -6,7 +6,7 @@ metadata:
     app: expense-backend
     tier: backend
 spec:
-  replicas: 1
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
       app: expense-backend
