@@ -7,7 +7,7 @@ services:
     ports:
       - "80:8080"  # NGINX listens on container port 8080
     depends_on:
-      expense-backend-node:
+      expense-backend:
           condition: service_healthy
           restart: true
     #volumes:
@@ -33,7 +33,7 @@ services:
     ports:
       - "8080"     # Refers to host port
     depends_on:
-      expense-db-mysql:
+      expense-database:
         condition: service_healthy
         restart: true
     environment:
