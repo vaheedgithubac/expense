@@ -1,2 +1,3 @@
-deployment:
+image:
+  dockerHubUsername: vaheeddockerhub
   version: 1.0.0
