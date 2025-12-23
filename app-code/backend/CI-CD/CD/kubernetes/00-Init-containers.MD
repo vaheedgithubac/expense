@@ -187,11 +187,22 @@ spec:
 
 **3. ReadinessProbe** ensures the pod isn’t marked ready until MySQL is actually reachable.  
 - Uses the same secure `MYSQL_PWD` approach.  
-- Runs every 5 seconds after a 5-second delay.
-
-
+- Runs every 5 seconds after a 5-second delay.  
 ## ⚡ Advantages  
   - Minimal, secure, production-ready.   
   - No passwords in command-line args (`MYSQL_PWD` used).  
   - Works with **distroless Chainguard MySQL client**.  
   - Automatic retries handled by Kubernetes; no shell loops needed.  
+
+## 🥉 alpine + mysql-client (ULTRA lightweight)  
+```yaml
+image: alpine:3.19
+command:
+  - sh
+  - -c
+  - |
+    apk add --no-cache mysql-client
+    until mysqladmin ping -h mysql -u healthcheck -p"$MYSQL_HEALTHCHECK_PASSWORD"; do
+      sleep 3
+    done
+```
