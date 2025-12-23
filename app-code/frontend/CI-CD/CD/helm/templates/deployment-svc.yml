@@ -6,7 +6,7 @@ metadata:
     app: expense-frontend
     tier: frontend
 spec:
-  replicas: 1
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
       app: expense-frontend
@@ -34,7 +34,7 @@ spec:
       # ──────────────── App Container ────────────────
       containers:
         - name: expense-frontend-cont
-          image: vaheeddockerhub/expense-frontend:1.0.0
+          image: {{ .Values.image.registryUsername }}/expense-frontend:{{ .Values.image.version }}
           imagePullPolicy: Always
           ports:
             - name: frontend
