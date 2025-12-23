@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: expense-database
+  name: mysql
 spec: 
-  replicas: 1
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
       db: mysql
@@ -111,4 +111,3 @@ spec:
     protocol: "TCP"
     port: 3306           # Service port
     targetPort: 3306     # Container port
-
