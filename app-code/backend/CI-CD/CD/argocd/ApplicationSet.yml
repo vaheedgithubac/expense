@@ -10,8 +10,11 @@ spec:
         - list:
             elements:
               - env: dev
+              #- env: stage
+              #- env: prod
+        - list:
+            elements:
               - component: backend
-
   template:
     metadata:
       name: expense-{{env}}-{{component}}
