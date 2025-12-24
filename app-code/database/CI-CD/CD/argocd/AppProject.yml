@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: expense
+  namespace: argocd
+spec:
+  # Allowed Git repositories
+  sourceRepos:
+    # - https://github.com/my-org/*              # Allow all repos under your org
+    # - https://github.com/my-org/expense.git  # Or specific repo
+    
+    - https://github.com/vaheedgithubac/expense.git
+
+  # Allowed destinations (namespaces + clusters)
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: expense-dev
+    - server: https://kubernetes.default.svc
+      namespace: expense-stage
+    - server: https://kubernetes.default.svc
+      namespace: expense-prod
+
+  # Cluster-wide resources this AppProject can manage
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace          # Allow creation of Namespaces
+    - group: "rbac.authorization.k8s.io"
+      kind: Role
+    - group: "rbac.authorization.k8s.io"
+      kind: RoleBinding
+
+  # Namespace-scoped resources this AppProject can manage
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+  # Optional description / metadata
+  description: >
+    Single AppProject for all environments (dev, stage, prod) of Expense application.
+    Provides GitOps permissions and allows automated namespace creation.
