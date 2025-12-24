@@ -10,13 +10,7 @@ spec:
         - list:
             elements:
               - env: dev
-              #- env: stage
-              #- env: prod
-        - list:
-            elements:
               - component: backend
-              - component: frontend
-              - component: database
 
   template:
     metadata:
