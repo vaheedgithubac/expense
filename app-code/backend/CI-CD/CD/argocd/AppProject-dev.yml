@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: expense-dev                                    # 'Dev' environment
+  namespace: argocd
+spec:
+  sourceRepos:
+    - https://github.com/my-org/expense.git
+
+  destinations:
+    - server: https://kubernetes.default.svc           # Same cluster where ArgoCD is running
+      namespace: expense-dev                           # 'dev' namespace
+
+  clusterResourceWhitelist:
+    - group: ""
+      kind: "Namespace"                                # This Project will allow child Apps to create Namespace
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
