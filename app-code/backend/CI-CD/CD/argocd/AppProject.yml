@@ -6,7 +6,7 @@ metadata:
 spec:
   # Allowed Git repositories
   sourceRepos:
-    - https://github.com/my-org/*       # Allow all repos under your org
+    - https://github.com/my-org/*              # Allow all repos under your org
     # - https://github.com/my-org/expense.git  # Or specific repo
 
   # Allowed destinations (namespaces + clusters)
