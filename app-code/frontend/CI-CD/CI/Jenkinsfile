@@ -14,11 +14,11 @@ def config = [
     MY_GIT_BRANCH: "",            // Defaults to "main" if not set
 
     // TRIVY FS SCAN Variables
-    EXECUTE_TRIVY_FS_STAGE: "no",              // required (yes/no)
-    TRIVY_FS_TARGET: ".",                      // Defaults to "." (Current File System)
-    TRIVY_FS_SCAN_FORMAT: "table",             // required
-    TRIVY_FS_OUTPUT_FORMAT: "txt",             // required 
-    TRIVY_FS_SEVERITY: "HIGH,MEDIUM,LOW",      // Default to "HIGH,MEDIUM,LOW"
+    EXECUTE_TRIVY_FS_STAGE: "yes",                // required (yes/no)
+    TRIVY_FS_TARGET: "app-code/frontend/code",   // Defaults to "." (Current File System)
+    TRIVY_FS_SCAN_FORMAT: "table",               // required
+    TRIVY_FS_OUTPUT_FORMAT: "txt",               // required 
+    TRIVY_FS_SEVERITY: "HIGH,MEDIUM,LOW",        // Default to "HIGH,MEDIUM,LOW"
 
     // SONARQUBE SCAN Variables
     EXECUTE_SONARSCAN_STAGE: "no",            // required (yes/no)
