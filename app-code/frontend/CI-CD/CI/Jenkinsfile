@@ -75,7 +75,7 @@ def config = [
 config.NEXUS_SNAP_REPO    = "${config.NEXUS_BASE_REPO}-SNAPSHOT"
 config.NEXUS_RELEASE_REPO = "${config.NEXUS_BASE_REPO}-RELEASE"
 config.NEXUS_GRP_REPO     = "${config.NEXUS_BASE_REPO}-maven-group"
-config.NEXUS_HOST         =  "nexus.${config.PROJECT_NAME}.internal"
+config.NEXUS_HOST_1       =  "nexus.${config.PROJECT_NAME}.internal"
 
 // Compute ECR repo
 config.ECR_REGISTRY_URI = "${config.AWS_ACCOUNT_ID}.dkr.ecr.${config.REGION}.amazonaws.com"
