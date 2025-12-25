@@ -1,3 +1,4 @@
+# docker build app-code/backend -t backend-img:1.0.0 -f Docker/Dockerfile
 #FROM node:20
 FROM node:20.18.3-alpine3.21 AS builder
 WORKDIR /opt/backend
