@@ -1,3 +1,4 @@
+# docker build app-code/frontend -t frontend-img:1.0.0 -f Docker/Dockerfile
 FROM nginx:stable-alpine
 
 # Remove default server and default index
