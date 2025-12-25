@@ -51,7 +51,7 @@ def config = [
 
     // Nexus Variables
     EXECUTE_NEXUS_STAGE: "no",              // required (yes/no)
-    NEXUS_HOST: '13.235.95.123'             // required   
+    NEXUS_HOST: '13.235.95.123',            // required   
     NEXUS_PORT: '8081',                     // required
     NEXUS_PROTOCOL: 'http',                 // required
     NEXUS_VERSION: 'nexus3',                // required
