@@ -46,7 +46,7 @@ spec:
       source:
         repoURL: https://github.com/vaheedgithubac/expense.git
         targetRevision: main
-        path: app-code/{{component}}/CI-CD/CD/helm  #"{{path}}/helm"
+        path: app-code/{{component}}/CI-CD/CD/helm  #"{{path}}/helm"    # Chart.yml path
         helm:
           valueFiles:
             - values-dockerHub.yml
