@@ -48,6 +48,7 @@ spec:
         targetRevision: main
         path: app-code/{{component}}/CI-CD/CD/helm  #"{{path}}/helm"    # Chart.yml path
         helm:
+          releaseName: database
           valueFiles:
             - values-dockerHub.yml
 
