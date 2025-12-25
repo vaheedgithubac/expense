@@ -1,12 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: expense-applicationset-dev
+  name: expense-applicationset
   namespace: argocd
 spec:
   generators:
   - matrix:
       generators:
+        - list:
+            elements:
+              - project: expense
         - list:
             elements:
               - env: dev
@@ -20,13 +23,13 @@ spec:
 
   template:
     metadata:
-      name: expense-{{env}}-{{component}}
+      name: "{{project}}-{{env}}-{{component}}"
       namespace: argocd
       labels:
         env: "{{env}}"
-        project: expense
+        project: "{{project}}"
         component: "{{component}}"
-        app.kubernetes.io/part-of: expense
+        app.kubernetes.io/part-of: "{{project}}"
 
       annotations:
         # 🔹 SYNC WAVES (CRITICAL)
@@ -44,19 +47,20 @@ spec:
         #notifications.argoproj.io/subscribe.on-sync-failed.email: "expense-{{env}}-{{path.basename}}@example.com"
 
     spec:
-      project: expense         # This is the name of 'AppProject' created previously
+      project: "{{project}}"         # This name should match with the name of 'AppProject' created previously
 
       source:
         repoURL: https://github.com/vaheedgithubac/expense.git
         targetRevision: main
         path: app-code/{{component}}/CI-CD/CD/helm  #"{{path}}/helm"
         helm:
+          releaseName: {{project}}-{{env}}-{{component}}  # must be <= 53 chars
           valueFiles:
             - values-dockerHub.yml
 
       destination:
         server: https://kubernetes.default.svc
-        namespace: "expense-{{env}}"
+        namespace: "{{project}}-{{env}}"
 
       syncPolicy:
         automated:
@@ -67,3 +71,15 @@ spec:
           - ApplyOutOfSyncOnly=true
           - ServerSideApply=true
           - PruneLast=true
+
+
+
+      #syncPolicy:
+      #  {{- if ne .component "database" }}
+      #  automated:
+      #    prune: true
+      #    selfHeal: true
+      #  {{- else }}
+      #  automated:
+      #    selfHeal: true
+      #  {{- end }}
