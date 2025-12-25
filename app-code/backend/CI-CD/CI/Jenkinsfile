@@ -49,7 +49,7 @@ def config = [
     EXECUTE_ECR_PUSH_STAGE: "no",           // required (yes/no)
     AWS_ACCOUNT_ID: "",                     // required 
     REGION: "ap-south-1",                   // Defaults to 'ap-south-1' 
-    AWS_CREDENTIALS_ID: "aws-prod-creds",   // required 
+    AWS_CREDENTIALS_ID: "aws-prod-creds",   // required           // AWS steps plugin
 
     // Nexus Variables
     EXECUTE_NEXUS_STAGE: "no",              // required (yes/no)
