@@ -53,7 +53,7 @@ def config = [
 
     // Nexus Variables
     EXECUTE_NEXUS_STAGE: "no",              // required (yes/no)
-    NEXUS_HOST: "nexus.${config.PROJECT_NAME}.internal",  // required   '13.235.95.123'
+    NEXUS_HOST: '13.235.95.123',            // required   
     NEXUS_PORT: '8081',                     // required
     NEXUS_PROTOCOL: 'http',                 // required
     NEXUS_VERSION: 'nexus3',                // required
@@ -75,6 +75,7 @@ def config = [
 config.NEXUS_SNAP_REPO    = "${config.NEXUS_BASE_REPO}-SNAPSHOT"
 config.NEXUS_RELEASE_REPO = "${config.NEXUS_BASE_REPO}-RELEASE"
 config.NEXUS_GRP_REPO     = "${config.NEXUS_BASE_REPO}-maven-group"
+config.NEXUS_HOST         =  "nexus.${config.PROJECT_NAME}.internal"
 
 // Compute ECR repo
 config.ECR_REGISTRY_URI = "${config.AWS_ACCOUNT_ID}.dkr.ecr.${config.REGION}.amazonaws.com"
