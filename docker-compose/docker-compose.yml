@@ -37,7 +37,7 @@ services:
         condition: service_healthy
         restart: true
     environment:
-      - DB_HOST=expense-db-mysql
+      - DB_HOST=expense-database
     networks:
       - frontend
       - backend
