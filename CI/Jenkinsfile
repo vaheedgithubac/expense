@@ -4,7 +4,7 @@ def config = [
     // Project Variables
     PROJECT_NAME: "expense",   // required     
     PROJECT_KEY: "expense",    // required
-    COMPONENT: "backend",     // required
+    COMPONENT: "expense",     // required
 
     // Git Variables
     EXECUTE_GITCHECKOUT_STAGE: "yes",
