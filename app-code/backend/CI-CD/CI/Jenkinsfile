@@ -31,6 +31,8 @@ def config = [
     
     // DOCKER BUILD Variables
     EXECUTE_DOCKER_IMAGE_BUILD_STAGE: "no",   // required (yes/no)
+    DOCKER_CONTEXT: app-code/backend,                       // defaults to "."
+    DOCKERFILE: app-code/backend/Dockerfile,                // defaults to "Dockerfile"
     
     // TRIVY IMAGE SCAN Variables
     EXECUTE_TRIVY_IMAGE_STAGE: "no",            // required (yes/no)
