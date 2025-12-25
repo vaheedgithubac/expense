@@ -54,7 +54,7 @@ spec:
         targetRevision: main
         path: app-code/{{component}}/CI-CD/CD/helm  #"{{path}}/helm"
         helm:
-          releaseName: {{project}}-{{env}}-{{component}}  # must be <= 53 chars
+          releaseName: "{{project}}-{{env}}-{{component}}"  # must be <= 53 chars
           valueFiles:
             - values-dockerHub.yml
 
