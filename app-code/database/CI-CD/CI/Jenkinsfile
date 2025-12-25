@@ -1,0 +1,84 @@
+@Library('Jenkins-Shared-Library-04') _
+
+def config = [
+    // Project Variables
+    PROJECT_NAME: "expense",   // required     
+    PROJECT_KEY: "expense",    // required
+    COMPONENT: "database",     // required
+
+    // Git Variables
+    EXECUTE_GITCHECKOUT_STAGE: "yes",
+    MY_GIT_URL: "https://github.com/vaheedgithubac/expense.git", // required
+    MY_GIT_REPO_TYPE: "public",   // required (public/private)
+    MY_GIT_CREDENTIALS_ID: "",    // required for private repos
+    MY_GIT_BRANCH: "",            // Defaults to "main" if not set
+
+    // TRIVY FS SCAN Variables
+    EXECUTE_TRIVY_FS_STAGE: "yes",              // required (yes/no)
+    TRIVY_FS_TARGET: ".",                      // Defaults to "." (Current File System)
+    TRIVY_FS_SCAN_FORMAT: "table",             // required
+    TRIVY_FS_OUTPUT_FORMAT: "txt",             // required 
+    TRIVY_FS_SEVERITY: "HIGH,MEDIUM,LOW",      // Default to "HIGH,MEDIUM,LOW"
+
+    // SONARQUBE SCAN Variables
+    EXECUTE_SONARSCAN_STAGE: "no",            // required (yes/no)
+    SONARQUBE_SERVER: "sonarqube-server",     // required 
+    SONAR_SCANNER_NAME: "sonarscanner",       // required
+    
+    // SONAR QG Variables
+    EXECUTE_SONAR_QG_STAGE: "no",   // required (yes/no)
+    TIMEOUT_MINUTES: 5,             // For Sonarqube Quality gate (Default is 5 Minutes)
+    
+    // DOCKER BUILD Variables
+    EXECUTE_DOCKER_IMAGE_BUILD_STAGE: "yes",                        // required (yes/no)
+    DOCKER_CONTEXT: app-code/database,                              // defaults to "."
+    DOCKERFILE: app-code/database/Docker/Dockerfile,                // defaults to "Dockerfile"
+      
+    // TRIVY IMAGE SCAN Variables
+    EXECUTE_TRIVY_IMAGE_STAGE: "no",            // required (yes/no)
+    TRIVY_IMAGE_SCAN_FORMAT: "table",           // required
+    TRIVY_IMAGE_OUTPUT_FORMAT: "txt",           // required 
+    TRIVY_IMAGE_SEVERITY: "HIGH,MEDIUM,LOW",    // Default to "HIGH,MEDIUM,LOW"
+
+    // DOCKER HUB Registry Variables
+    EXECUTE_DOCKER_HUB_PUSH_STAGE: "no",              // required (yes/no)
+    DOCKER_REPO_URI: "docker.io",                     // Defaults to 'docker.io'
+    DOCKER_HUB_CREDENTIALS_ID: "docker-prod-creds",   // required 
+
+    // ECR Variables
+    EXECUTE_ECR_PUSH_STAGE: "no",           // required (yes/no)
+    AWS_ACCOUNT_ID: "",                     // required 
+    REGION: "ap-south-1",                   // Defaults to 'ap-south-1' 
+    AWS_CREDENTIALS_ID: "aws-prod-creds",   // required 
+
+    // Nexus Variables
+    EXECUTE_NEXUS_STAGE: "no",              // required (yes/no)
+    NEXUS_HOST: '13.235.95.123',            // required   
+    NEXUS_PORT: '8081',                     // required
+    NEXUS_PROTOCOL: 'http',                 // required
+    NEXUS_VERSION: 'nexus3',                // required
+    NEXUS_BASE_REPO: 'expense',             // required
+    NEXUS_GRP_ID: 'QA',                     // required
+    NEXUS_CREDENTIALS_ID: '',               // required
+
+    // EMAIL Variables
+    EXECUTE_EMAIL_STAGE: "no",      // required (yes/no)
+    FROM_MAIL: "",                  // required
+    TO_MAIL: "",                    // required
+    REPLY_TO_MAIL: "",              // required
+    CC_MAIL: "",                    // Defaults to null
+    BCC_MAIL: "",                   // Defaults to null
+    ATTACHMENTS: ""                 // Defaults to null  // "trivy-reports/*, owasp-reports/*, surefire-reports/*.xml"
+]
+
+// Compute derived Nexus repos
+config.NEXUS_SNAP_REPO    = "${config.NEXUS_BASE_REPO}-SNAPSHOT"
+config.NEXUS_RELEASE_REPO = "${config.NEXUS_BASE_REPO}-RELEASE"
+config.NEXUS_GRP_REPO     = "${config.NEXUS_BASE_REPO}-maven-group"
+config.NEXUS_HOST_1       =  "nexus.${config.PROJECT_NAME}.internal"    // required   '13.235.95.123'
+
+// Compute ECR repo
+config.ECR_REGISTRY_URI = "${config.AWS_ACCOUNT_ID}.dkr.ecr.${config.REGION}.amazonaws.com"
+
+// Call pipeline
+PIPELINE_NODEJS(config)
