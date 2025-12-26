@@ -14,7 +14,7 @@ def config = [
     MY_GIT_BRANCH: "",            // Defaults to "main" if not set
 
     // TRIVY FS SCAN Variables
-    EXECUTE_TRIVY_FS_STAGE: "yes",                // required (yes/no)
+    EXECUTE_TRIVY_FS_STAGE: "yes",               // required (yes/no)
     TRIVY_FS_TARGET: "app-code/frontend/code",   // Defaults to "." (Current File System)
     TRIVY_FS_SCAN_FORMAT: "table",               // required
     TRIVY_FS_OUTPUT_FORMAT: "txt",               // required 
@@ -57,7 +57,7 @@ def config = [
     NEXUS_PORT: '8081',                     // required
     NEXUS_PROTOCOL: 'http',                 // required
     NEXUS_VERSION: 'nexus3',                // required
-    NEXUS_BASE_REPO: 'expense',               // required
+    NEXUS_BASE_REPO: 'expense',             // required
     NEXUS_GRP_ID: 'QA',                     // required
     NEXUS_CREDENTIALS_ID: '',               // required
 
