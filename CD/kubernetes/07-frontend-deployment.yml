@@ -26,7 +26,7 @@ spec:
             - -c
             - |
               echo "Waiting for app to be ready on port 8080..."
-              until curl -sSf http://expense-backend:8080/health >/dev/null 2>&1; do
+              until curl -Ssf http://expense-backend:8080/health >/dev/null 2>&1; do
                 echo "App not ready yet, retrying in 3s..."
                 sleep 3
               done
@@ -46,7 +46,7 @@ spec:
         initialDelaySeconds: 10
         periodSeconds: 10
         timeoutSeconds: 10
-        failureThreshold: 6
+        failureThreshold: 5
       # ──────────────── Readiness Probe ────────────────
       readinessProbe:
         tcpSocket:
