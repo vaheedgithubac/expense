@@ -23,7 +23,7 @@ RUN mkdir -p \
   && chmod 755 /etc/nginx
 
 # Copy custom NGINX config
-COPY Docker/files/expense.conf /etc/nginx/conf.d/expense.conf
+COPY Docker_Stuff/expense.conf /etc/nginx/conf.d/expense.conf
 
 # Ensure config file permissions
 RUN chmod 644 /etc/nginx/conf.d/*.conf
