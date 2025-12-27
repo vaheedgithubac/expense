@@ -51,6 +51,14 @@ def config = [
     REGION: "ap-south-1",                   // Defaults to 'ap-south-1' 
     AWS_CREDENTIALS_ID: "aws-prod-creds",   // required 
 
+    // Update Image Tag in GitHub
+    EXECUTE_UPDATE_IMAGE_TAG_GITHUB_STAGE: "no",
+    GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
+    GIT_REPO_NAME: "expense",
+    VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
+    HELM_VALUES_FILE: "app-code/database/CI-CD/CD/helm/values.yml",      // required if you want to update helm values file
+    DEPLOYMENT_FILE: "",                                                 // required if you want to update deployment file
+
     // Nexus Variables
     EXECUTE_NEXUS_STAGE: "no",              // required (yes/no)
     NEXUS_HOST: '13.235.95.123',            // required   
