@@ -34,7 +34,7 @@ spec:
       # ──────────────── App Container ────────────────
       containers:
         - name: expense-frontend-cont
-          image: vaheeddockerhub/expense-frontend:1.0.0
+          image: vaheeddockerhub/expense-frontend:3c6dd81
           imagePullPolicy: Always
           ports:
             - name: frontend
