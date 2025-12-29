@@ -40,9 +40,9 @@ def config = [
     TRIVY_IMAGE_OUTPUT_FORMAT: "txt",           // required 
     TRIVY_IMAGE_SEVERITY: "HIGH,MEDIUM,LOW",    // Default to "HIGH,MEDIUM,LOW"
 
-    // DOCKER HUB Registry Variables
+    // DOCKER HUB PUSH Registry Variables
     EXECUTE_DOCKER_HUB_PUSH_STAGE: "no",              // required (yes/no)
-    DOCKER_REPO_URI: "docker.io",                     // Defaults to 'docker.io'
+    DOCKER_REGISTRY_URI: "docker.io",                     // Defaults to 'docker.io'
     DOCKER_HUB_CREDENTIALS_ID: "docker-prod-creds",   // required 
 
     // ECR Variables
