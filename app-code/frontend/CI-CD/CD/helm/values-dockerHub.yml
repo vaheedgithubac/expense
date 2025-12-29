@@ -3,7 +3,7 @@ component: frontend
 
 image:
   registryUsername: vaheeddockerhub
-  imageVersion: cb3b8ae
+  imageVersion: 4cca6a7
   
 deployment:
   replicas: 1
