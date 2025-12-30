@@ -27,16 +27,11 @@ spec:
             - -c
             - |
               echo "Waiting for MySQL to be ready..."
-              until mysql \
-                -h mysql-svc \
-                -u healthcheck \
-                -p"$MYSQL_HEALTHCHECK_PASSWORD" \
-                -e "SELECT 1" >/dev/null 2>&1; do
-                sleep 3
-              done
+              until mysql -h mysql-svc -u healthcheck -e "SELECT 1" >/dev/null 2>&1; do sleep 3; done
               echo "MySQL is ready"
+              # until mysqladmin ping -h mysql-svc -u healthcheck --silent; do sleep 3; done; echo "MySQL is ready"
           env:
-            - name: MYSQL_HEALTHCHECK_PASSWORD
+            - name: MYSQL_PWD    # 'MYSQL_PWD' is predefined env variable which mysql automatically looks for 
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
@@ -99,7 +94,7 @@ metadata:
     app: expense-backend
     tier: backend
 spec:
-  #type: ClusterIP
+  type: ClusterIP
   selector:
     app: expense-backend
     tier: backend
