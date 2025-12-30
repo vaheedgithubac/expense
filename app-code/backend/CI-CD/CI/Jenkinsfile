@@ -41,7 +41,7 @@ def config = [
     TRIVY_IMAGE_SEVERITY: "HIGH,MEDIUM,LOW",    // Default to "HIGH,MEDIUM,LOW"
 
     // DOCKER HUB PUSH Registry Variables
-    EXECUTE_DOCKER_HUB_PUSH_STAGE: "yes",              // required (yes/no)
+    EXECUTE_DOCKER_HUB_PUSH_STAGE: "no",              // required (yes/no)
     DOCKER_REGISTRY_URI: "docker.io",                     // Defaults to 'docker.io'
     DOCKER_HUB_CREDENTIALS_ID: "docker-prod-creds",   // required 
 
@@ -52,7 +52,7 @@ def config = [
     AWS_CREDENTIALS_ID: "aws-prod-creds",   // required           // AWS steps plugin
 
     // Update Image Tag in GitHub
-    EXECUTE_UPDATE_IMAGE_TAG_GITHUB_STAGE: "yes",
+    EXECUTE_UPDATE_IMAGE_TAG_GITHUB_STAGE: "no",
     GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
     GIT_REPO_NAME: "expense",
     VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
