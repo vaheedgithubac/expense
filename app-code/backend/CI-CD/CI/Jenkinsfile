@@ -59,9 +59,7 @@ def config = [
     HELM_VALUES_FILE: "app-code/backend/CI-CD/CD/helm/values-dockerHub.yml",      // required if you want to update helm values file
     HELM_IMAGE_VERSION_KEY: "imageVersion",        // required if you want to edit 'HELM_VALUES_FILE'
     DEPLOYMENT_FILE: "app-code/backend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file
-    DOCKERHUB_USERNAME: "vaheeddockerhub",         // required if you want to update image tag that is available in Docker Hub
-    ECR_USERNAME: "",
-    
+        
     // Nexus Variables
     EXECUTE_NEXUS_STAGE: "no",              // required (yes/no)
     NEXUS_HOST: '13.235.95.123',            // required   
