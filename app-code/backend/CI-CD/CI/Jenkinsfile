@@ -52,7 +52,7 @@ def config = [
     AWS_CREDENTIALS_ID: "aws-prod-creds",   // required           // AWS steps plugin
 
     // Update Image Tag in GitHub Deploy DOCKER 
-    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_DOCKER: "no",
+    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_DOCKER: "yes",
     DEPLOYMENT_FILE: "app-code/backend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
     GIT_REPO_NAME: "expense",
     VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
