@@ -45,20 +45,34 @@ def config = [
     DOCKER_REGISTRY_URI: "docker.io",                     // Defaults to 'docker.io'
     DOCKER_HUB_CREDENTIALS_ID: "docker-prod-creds",   // required 
 
-    // ECR Variables
+    // ECR PUSH Variables
     EXECUTE_ECR_PUSH_STAGE: "no",           // required (yes/no)
     AWS_ACCOUNT_ID: "",                     // required 
     REGION: "ap-south-1",                   // Defaults to 'ap-south-1' 
     AWS_CREDENTIALS_ID: "aws-prod-creds",   // required           // AWS steps plugin
 
-    // Update Image Tag in GitHub
-    EXECUTE_UPDATE_IMAGE_TAG_GITHUB_STAGE: "yes",
-    GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
+    // Update Image Tag in GitHub Deploy DOCKER 
+    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_DOCKER: "no",
+    DEPLOYMENT_FILE: "app-code/backend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
     GIT_REPO_NAME: "expense",
     VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
+    GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
+    
+    // Update Image Tag in GitHub Deploy ECR 
+    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_DOCKER: "no",
+    DEPLOYMENT_FILE: "app-code/backend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
+    GIT_REPO_NAME: "expense",
+    VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
+    GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
+
+    // Update Image Tag in GitHub Deploy HELM 
+    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_DOCKER: "no",
     HELM_VALUES_FILE: "app-code/backend/CI-CD/CD/helm/values-dockerHub.yml",      // required if you want to update helm values file
     HELM_IMAGE_VERSION_KEY: "imageVersion",        // required if you want to edit 'HELM_VALUES_FILE'
-    DEPLOYMENT_FILE: "app-code/backend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
+    GIT_REPO_NAME: "expense",
+    VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
+    GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
+    
         
     // Nexus Variables
     EXECUTE_NEXUS_STAGE: "no",              // required (yes/no)
