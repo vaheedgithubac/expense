@@ -4,7 +4,7 @@ def config = [
     // Project Variables
     PROJECT_NAME: "expense",   // required     
     PROJECT_KEY: "expense",    // required
-    COMPONENT: "backend",      // required
+    COMPONENT: "frontend",      // required
 
     // Git Variables
     EXECUTE_GITCHECKOUT_STAGE: "yes",
@@ -15,7 +15,7 @@ def config = [
 
     // TRIVY FS SCAN Variables
     EXECUTE_TRIVY_FS_STAGE: "yes",             // required (yes/no)
-    TRIVY_FS_TARGET: "app-code/backend/code",  // Defaults to "." (Current File System)
+    TRIVY_FS_TARGET: "app-code/frontend/code",  // Defaults to "." (Current File System)
     TRIVY_FS_SCAN_FORMAT: "table",             // required
     TRIVY_FS_OUTPUT_FORMAT: "txt",             // required 
     TRIVY_FS_SEVERITY: "HIGH,MEDIUM,LOW",      // Default to "HIGH,MEDIUM,LOW"
@@ -31,7 +31,7 @@ def config = [
     
     // DOCKER BUILD Variables
     EXECUTE_DOCKER_IMAGE_BUILD_STAGE: "yes",   // required (yes/no)
-    DOCKER_CONTEXT: "app-code/backend",        // defaults to "."
+    DOCKER_CONTEXT: "app-code/frontend",        // defaults to "."
     DOCKERFILE: "Dockerfile",                  // defaults to 'Dockerfile' and it expects 'Dockerfile' in the 'DOCKER_CONTEXT' directory
     
     // TRIVY IMAGE SCAN Variables
@@ -41,7 +41,7 @@ def config = [
     TRIVY_IMAGE_SEVERITY: "HIGH,MEDIUM,LOW",    // Default to "HIGH,MEDIUM,LOW"
 
     // DOCKER HUB PUSH Registry Variables
-    EXECUTE_DOCKER_HUB_PUSH_STAGE: "yes",              // required (yes/no)
+    EXECUTE_DOCKER_HUB_PUSH_STAGE: "no",              // required (yes/no)
     DOCKER_REGISTRY_URI: "docker.io",                     // Defaults to 'docker.io'
     DOCKER_HUB_CREDENTIALS_ID: "docker-prod-creds",   // required 
 
@@ -53,21 +53,21 @@ def config = [
 
     // Update Image Tag in GitHub Deploy DOCKER 
     UPDATE_IMAGE_TAG_GITHUB_DEPLOY_DOCKER: "no",
-    DEPLOYMENT_FILE: "app-code/backend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
+    DEPLOYMENT_FILE: "app-code/frontend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
     GIT_REPO_NAME: "expense",
     VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
     GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
     
     // Update Image Tag in GitHub Deploy ECR 
     UPDATE_IMAGE_TAG_GITHUB_DEPLOY_ECR: "no",
-    DEPLOYMENT_FILE: "app-code/backend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
+    DEPLOYMENT_FILE: "app-code/frontend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
     GIT_REPO_NAME: "expense",
     VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
     GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
 
     // Update Image Tag in GitHub Deploy HELM 
     UPDATE_IMAGE_TAG_GITHUB_DEPLOY_HELM: "no",
-    HELM_VALUES_FILE: "app-code/backend/CI-CD/CD/helm/values-dockerHub.yml",      // required if you want to update helm values file
+    HELM_VALUES_FILE: "app-code/frontend/CI-CD/CD/helm/values-dockerHub.yml",      // required if you want to update helm values file
     HELM_IMAGE_VERSION_KEY: "imageVersion",        // required if you want to edit 'HELM_VALUES_FILE'
     GIT_REPO_NAME: "expense",
     VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
