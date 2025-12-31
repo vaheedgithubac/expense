@@ -4,7 +4,7 @@ def config = [
     // Project Variables
     PROJECT_NAME: "expense",   // required     
     PROJECT_KEY: "expense",    // required
-    COMPONENT: "frontend",     // required
+    COMPONENT: "backend",      // required
 
     // Git Variables
     EXECUTE_GITCHECKOUT_STAGE: "yes",
@@ -14,11 +14,11 @@ def config = [
     MY_GIT_BRANCH: "",            // Defaults to "main" if not set
 
     // TRIVY FS SCAN Variables
-    EXECUTE_TRIVY_FS_STAGE: "yes",               // required (yes/no)
-    TRIVY_FS_TARGET: "app-code/frontend/code",   // Defaults to "." (Current File System)
-    TRIVY_FS_SCAN_FORMAT: "table",               // required
-    TRIVY_FS_OUTPUT_FORMAT: "txt",               // required 
-    TRIVY_FS_SEVERITY: "HIGH,MEDIUM,LOW",        // Default to "HIGH,MEDIUM,LOW"
+    EXECUTE_TRIVY_FS_STAGE: "yes",             // required (yes/no)
+    TRIVY_FS_TARGET: "app-code/backend/code",  // Defaults to "." (Current File System)
+    TRIVY_FS_SCAN_FORMAT: "table",             // required
+    TRIVY_FS_OUTPUT_FORMAT: "txt",             // required 
+    TRIVY_FS_SEVERITY: "HIGH,MEDIUM,LOW",      // Default to "HIGH,MEDIUM,LOW"
 
     // SONARQUBE SCAN Variables
     EXECUTE_SONARSCAN_STAGE: "no",            // required (yes/no)
@@ -31,7 +31,7 @@ def config = [
     
     // DOCKER BUILD Variables
     EXECUTE_DOCKER_IMAGE_BUILD_STAGE: "yes",   // required (yes/no)
-    DOCKER_CONTEXT: "app-code/frontend",       // defaults to "."
+    DOCKER_CONTEXT: "app-code/backend",        // defaults to "."
     DOCKERFILE: "Dockerfile",                  // defaults to 'Dockerfile' and it expects 'Dockerfile' in the 'DOCKER_CONTEXT' directory
     
     // TRIVY IMAGE SCAN Variables
@@ -41,25 +41,39 @@ def config = [
     TRIVY_IMAGE_SEVERITY: "HIGH,MEDIUM,LOW",    // Default to "HIGH,MEDIUM,LOW"
 
     // DOCKER HUB PUSH Registry Variables
-    EXECUTE_DOCKER_HUB_PUSH_STAGE: "no",              // required (yes/no)
+    EXECUTE_DOCKER_HUB_PUSH_STAGE: "yes",              // required (yes/no)
     DOCKER_REGISTRY_URI: "docker.io",                     // Defaults to 'docker.io'
     DOCKER_HUB_CREDENTIALS_ID: "docker-prod-creds",   // required 
 
-    // ECR Variables
+    // ECR PUSH Variables
     EXECUTE_ECR_PUSH_STAGE: "no",           // required (yes/no)
     AWS_ACCOUNT_ID: "",                     // required 
     REGION: "ap-south-1",                   // Defaults to 'ap-south-1' 
-    AWS_CREDENTIALS_ID: "aws-prod-creds",   // required 
+    AWS_CREDENTIALS_ID: "aws-prod-creds",   // required           // AWS steps plugin
 
-    // Update Image Tag in GitHub
-    EXECUTE_UPDATE_IMAGE_TAG_GITHUB_STAGE: "no",
-    GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
+    // Update Image Tag in GitHub Deploy DOCKER 
+    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_DOCKER: "no",
+    DEPLOYMENT_FILE: "app-code/backend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
     GIT_REPO_NAME: "expense",
     VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
-    HELM_VALUES_FILE: "app-code/frontend/CI-CD/CD/helm/values-dockerHub.yml",      // required if you want to update helm values file
-    HELM_IMAGE_VERSION_KEY: "imageVersion",        // required if you want to edit 'HELM_VALUES_FILE'
+    GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
+    
+    // Update Image Tag in GitHub Deploy ECR 
+    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_ECR: "no",
     DEPLOYMENT_FILE: "app-code/backend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
+    GIT_REPO_NAME: "expense",
+    VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
+    GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
 
+    // Update Image Tag in GitHub Deploy HELM 
+    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_HELM: "no",
+    HELM_VALUES_FILE: "app-code/backend/CI-CD/CD/helm/values-dockerHub.yml",      // required if you want to update helm values file
+    HELM_IMAGE_VERSION_KEY: "imageVersion",        // required if you want to edit 'HELM_VALUES_FILE'
+    GIT_REPO_NAME: "expense",
+    VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
+    GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
+    
+        
     // Nexus Variables
     EXECUTE_NEXUS_STAGE: "no",              // required (yes/no)
     NEXUS_HOST: '13.235.95.123',            // required   
@@ -84,11 +98,10 @@ def config = [
 config.NEXUS_SNAP_REPO    = "${config.NEXUS_BASE_REPO}-SNAPSHOT"
 config.NEXUS_RELEASE_REPO = "${config.NEXUS_BASE_REPO}-RELEASE"
 config.NEXUS_GRP_REPO     = "${config.NEXUS_BASE_REPO}-maven-group"
-config.NEXUS_HOST_1       =  "nexus.${config.PROJECT_NAME}.internal"
+config.NEXUS_HOST_1       = "nexus.${config.PROJECT_NAME}.internal"
 
 // Compute ECR repo
 config.ECR_REGISTRY_URI = "${config.AWS_ACCOUNT_ID}.dkr.ecr.${config.REGION}.amazonaws.com"
 
 // Call pipeline
 PIPELINE_NODEJS(config)
-
