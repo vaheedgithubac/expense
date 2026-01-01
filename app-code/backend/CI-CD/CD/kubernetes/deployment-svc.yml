@@ -31,7 +31,7 @@ spec:
               echo "MySQL is ready"
               # until mysqladmin ping -h mysql-svc -u healthcheck --silent; do sleep 3; done; echo "MySQL is ready"
           env:
-            - name: MYSQL_PWD    # 'MYSQL_PWD' is predefined env variable which mysql automatically looks for 
+            - name: MYSQL_PWD    # 'MYSQL_PWD' is predefined env variable which mysql client automatically looks for 
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
