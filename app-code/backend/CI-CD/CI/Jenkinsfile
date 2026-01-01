@@ -66,7 +66,7 @@ def config = [
     GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
 
     // Update Image Tag in GitHub Deploy HELM 
-    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_HELM: "yes",
+    UPDATE_IMAGE_TAG_GITHUB_DEPLOY_HELM: "no",
     HELM_VALUES_FILE: "app-code/backend/CI-CD/CD/helm/values-dockerHub.yml",      // required if you want to update helm values file
     HELM_IMAGE_VERSION_KEY: "imageVersion",        // required if you want to edit 'HELM_VALUES_FILE'
     GIT_REPO_NAME: "expense",
