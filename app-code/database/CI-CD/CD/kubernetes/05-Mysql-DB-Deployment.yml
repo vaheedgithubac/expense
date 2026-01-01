@@ -38,7 +38,7 @@ spec:
                   name: mysql-secret
                   key: MYSQL_ROOT_PASSWORD 
 
-            - name: MYSQL_HEALTHCHECK_PASSWORD
+            - name: MYSQL_PWD
               valueFrom:
                 secretKeyRef:
                 name: mysql-secret
@@ -60,7 +60,7 @@ spec:
           # - Prevent liveness probe from killing it during startup      
           startupProbe:
             exec:
-              command: ['sh', '-c', 'mysqladmin ping -h 127.0.0.1 -u healthcheck -p"$MYSQL_HEALTHCHECK_PASSWORD" >/dev/null 2>&1']
+              command: ['sh', '-c', 'mysqladmin ping -h 127.0.0.1 -u healthcheck >/dev/null 2>&1']    # automatically looks for MYSQL_PWD for password
             initialDelaySeconds: 15
             failureThreshold: 30   # 30 × 5s = 150s max startup time
             periodSeconds: 5 
@@ -74,7 +74,7 @@ spec:
           # - Pod is removed from Service if this fails
           readinessProbe:
             exec:
-              command: ['sh', '-c', 'mysql -h 127.0.0.1 -u healthcheck -p"$MYSQL_HEALTHCHECK_PASSWORD" -e "SELECT 1" >/dev/null 2>&1']
+              command: ['sh', '-c', 'mysql -h 127.0.0.1 -u healthcheck -e "SELECT 1" >/dev/null 2>&1']    # automatically looks for MYSQL_PWD for password
             initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 5
@@ -87,7 +87,7 @@ spec:
           # - Restart container if MySQL is hung or dead
           livenessProbe:
             exec:
-              command: ['sh', '-c', 'mysqladmin -h 127.0.0.1 -u healthcheck -p"$MYSQL_HEALTHCHECK_PASSWORD" >/dev/null 2>&1']
+              command: ['sh', '-c', 'mysqladmin -h 127.0.0.1 -u healthcheck >/dev/null 2>&1']    # automatically looks for MYSQL_PWD for password
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 2
