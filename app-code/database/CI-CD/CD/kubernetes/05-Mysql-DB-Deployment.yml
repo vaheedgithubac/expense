@@ -92,7 +92,7 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 2
             failureThreshold: 3
-          # mysql clients(mysql, mysqladmin, mysqldump) automatically looks for env variable 'MYSQL_PWD'     
+          # mysql clients (mysql, mysqladmin, mysqldump) automatically looks for env variable 'MYSQL_PWD'     
 ---
 apiVersion: v1
 kind: Service
