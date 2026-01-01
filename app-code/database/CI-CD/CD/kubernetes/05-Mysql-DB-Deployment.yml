@@ -60,7 +60,7 @@ spec:
           # - Prevent liveness probe from killing it during startup      
           startupProbe:
             exec:
-              command: ['sh', '-c', 'mysqladmin ping -h 127.0.0.1 -u healthcheck >/dev/null 2>&1']    # mysqladmin automatically looks for 'MYSQL_PWD' for password
+              command: ['sh', '-c', 'mysqladmin ping -h 127.0.0.1 -u healthcheck --silent >/dev/null 2>&1']    # mysqladmin automatically looks for 'MYSQL_PWD' for password
             initialDelaySeconds: 15
             failureThreshold: 30   # 30 × 5s = 150s max startup time
             periodSeconds: 5 
@@ -87,7 +87,7 @@ spec:
           # - Restart container if MySQL is hung or dead
           livenessProbe:
             exec:
-              command: ['sh', '-c', 'mysqladmin -h 127.0.0.1 -u healthcheck >/dev/null 2>&1']    # mysqladmin automatically looks for 'MYSQL_PWD' for password
+              command: ['sh', '-c', 'mysqladmin -h 127.0.0.1 -u healthcheck --silent >/dev/null 2>&1']    # mysqladmin automatically looks for 'MYSQL_PWD' for password
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 2
