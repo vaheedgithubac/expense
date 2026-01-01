@@ -41,7 +41,7 @@ def config = [
     TRIVY_IMAGE_SEVERITY: "HIGH,MEDIUM,LOW",    // Default to "HIGH,MEDIUM,LOW"
 
     // DOCKER HUB PUSH Registry Variables
-    EXECUTE_DOCKER_HUB_PUSH_STAGE: "no",              // required (yes/no)
+    EXECUTE_DOCKER_HUB_PUSH_STAGE: "yes",              // required (yes/no)
     DOCKER_REGISTRY_URI: "docker.io",                     // Defaults to 'docker.io'
     DOCKER_HUB_CREDENTIALS_ID: "docker-prod-creds",   // required 
 
@@ -51,21 +51,21 @@ def config = [
     REGION: "ap-south-1",                   // Defaults to 'ap-south-1' 
     AWS_CREDENTIALS_ID: "aws-prod-creds",   // required           // AWS steps plugin
 
-    // Update Image Tag in GitHub Deploy DOCKER 
+    // Update Image Tag in GitHub Deploy DOCKER  (This step requires DOCKER PUSH)
     UPDATE_IMAGE_TAG_GITHUB_DEPLOY_DOCKER: "yes",
     DEPLOYMENT_FILE: "app-code/frontend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
     GIT_REPO_NAME: "expense",
     VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
     GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
     
-    // Update Image Tag in GitHub Deploy ECR 
+    // Update Image Tag in GitHub Deploy ECR    (This step requires ECR PUSH)
     UPDATE_IMAGE_TAG_GITHUB_DEPLOY_ECR: "no",
     DEPLOYMENT_FILE: "app-code/frontend/CI-CD/CD/kubernetes/deployment-svc.yml",       // required if you want to update deployment file (need Image also)
     GIT_REPO_NAME: "expense",
     VERSION_CONTROL_SYSTEM: "github",        // required (github/gitlab)  Defaults to 'github'
     GIT_DEPLOY_HTTPS_CREDS: "git-deploy-https-creds",
 
-    // Update Image Tag in GitHub Deploy HELM 
+    // Update Image Tag in GitHub Deploy HELM   
     UPDATE_IMAGE_TAG_GITHUB_DEPLOY_HELM: "no",
     HELM_VALUES_FILE: "app-code/frontend/CI-CD/CD/helm/values-dockerHub.yml",      // required if you want to update helm values file
     HELM_IMAGE_VERSION_KEY: "imageVersion",        // required if you want to edit 'HELM_VALUES_FILE'
