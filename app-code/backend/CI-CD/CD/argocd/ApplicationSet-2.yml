@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: expense-applicationset
+  namespace: argocd
+spec:
+  generators:
+    - matrix:
+        generators:
+          # Matrix 1: project × env
+          - list:
+              elements:
+                - project: expense
+          - list:
+              elements:
+                - env: dev
+
+          # Matrix 2: (project,env) × component
+          - matrix:
+              generators:
+                - list:
+                    elements:
+                      - component: backend
+                      - component: frontend
+                      - component: database
