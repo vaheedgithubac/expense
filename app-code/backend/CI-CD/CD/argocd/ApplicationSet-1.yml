@@ -13,9 +13,9 @@ spec:
         - project: expense
           env: dev
           component: frontend
-        - project: expense
-          env: dev
-          component: database
+        #- project: expense
+        #  env: dev
+        #  component: database
 
   template:
     metadata:
