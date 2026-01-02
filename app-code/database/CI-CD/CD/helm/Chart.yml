@@ -1,5 +1,5 @@
 apiVersion: v2
 name: backend
 version: 1.0.0     # chart version
-description: This is backend deployment
-appVersion: 1.0.0  # 'backend' app version
+description: This is database deployment
+appVersion: 1.0.0  # 'database' app version
