@@ -40,30 +40,30 @@ spec:
             - name: frontend
               containerPort: 8080
       # ──────────────── Startup Probe ────────────────
-      startupProbe:
-        tcpSocket:
-          port: 8080
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 10
-        failureThreshold: 6
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 6
       # ──────────────── Readiness Probe ────────────────
-      readinessProbe:
-        tcpSocket:
-          port: 8080
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 10
-        failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 3
       # ──────────────── Liveness Probe ────────────────
-      livenessProbe:
-        httpGet:
-          path: /nginx-health
-          port: 8080
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 10
-        failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /nginx-health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 3
           
 ---
 apiVersion: v1
