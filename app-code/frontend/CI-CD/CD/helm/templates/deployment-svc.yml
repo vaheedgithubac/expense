@@ -20,7 +20,7 @@ spec:
       # ──────────────── InitContainer ────────────────
       initContainers:
         - name: wait-for-app
-          image: curlimages/curl:8.1.2   # Tiny image with curl
+          image: curlimages/curl:8.1.2
           command:
             - sh
             - -c
@@ -39,24 +39,21 @@ spec:
           ports:
             - name: frontend
               containerPort: 8080
-      # ──────────────── Startup Probe ────────────────
-          startupProbe:
+          startupProbe:                # ✅ Moved to correct indentation
             tcpSocket:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 6
-      # ──────────────── Readiness Probe ────────────────
-          readinessProbe:
+          readinessProbe:              # ✅ Correct indentation
             tcpSocket:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 3
-      # ──────────────── Liveness Probe ────────────────
-          livenessProbe:
+          livenessProbe:               # ✅ Correct indentation
             httpGet:
               path: /nginx-health
               port: 8080
@@ -79,8 +76,8 @@ spec:
     app: expense-frontend
     tier: frontend
   ports:
-  - name: expense-frontend
-    protocol: "TCP"
-    port: 8080
-    targetPort: 8080
-    nodePort: 32127
+    - name: expense-frontend
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 32127
