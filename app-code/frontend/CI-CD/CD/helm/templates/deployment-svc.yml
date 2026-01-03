@@ -20,7 +20,7 @@ spec:
       # ──────────────── InitContainer ────────────────
       initContainers:
         - name: wait-for-app
-          image: curlimages/curl:8.1.2
+          image: curlimages/curl:8.4.0
           command:
             - sh
             - -c
