@@ -34,7 +34,7 @@ spec:
       # ──────────────── App Container ────────────────
       containers:
         - name: expense-frontend-cont
-          image: "{{ .Values.image.registryUsername }}/expense-frontend:{{ .Values.image.imageVersion }}"
+          image: "{{ .Values.image.imageName }}:{{ .Values.image.imageVersion }}"
           imagePullPolicy: Always
           ports:
             - name: frontend
