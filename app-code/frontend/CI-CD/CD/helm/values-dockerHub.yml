@@ -2,7 +2,7 @@ project: expense
 component: frontend
 
 image:
-  registryUsername: vaheeddockerhub
+  registryUsername: vaheeddockerhub/expense-backend
   imageVersion: 2fd088e
   
 deployment:
