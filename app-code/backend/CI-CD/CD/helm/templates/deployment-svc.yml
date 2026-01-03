@@ -41,7 +41,7 @@ spec:
       # ──────────────── App Container ────────────────    
       containers:
       - name: expense-backend-cont
-        image: {{ .Values.image.registryUsername }}/expense-backend:{{ .Values.image.version }}
+        image: "{{ .Values.image.registryUsername }}/expense-backend:{{ .Values.image.version }}"
         imagePullPolicy: Always
 
         ports:
