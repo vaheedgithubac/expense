@@ -20,8 +20,8 @@ spec:
       # ──────────────── InitContainer ────────────────
       initContainers:
         - name: wait-for-mysql
-          # image: mysql:8.0-oraclelinux8-client       # lightweight client-only image around 50 MB
-          image: cgr.dev/chainguard/mysql-client:8.0   # Lightweight & secure around 10 MB
+          image: mysql:8.0-oraclelinux8-client       # lightweight client-only image around 50 MB
+          # image: cgr.dev/chainguard/mysql-client:8.0   # Lightweight & secure around 10 MB
           command:
             - sh
             - -c
